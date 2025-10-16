@@ -18,7 +18,7 @@ pipeline {
             }
             stage ('owasp dependency check') {
               steps {
-                dependencyCheck additionalArguments: '''
+                dependencyCheck additionalArguments: ''' //small error
                   --scan "./" \
                   --out "./" \
                   --format "ALL" \
