@@ -4,13 +4,13 @@ pipeline {
     nodejs 'nodejs-24-7-0'
   }
   stages {
-    parallel {
       stage ('install depenedencies') {
         steps{
           sh 'npm install --no-audit'
         }
       }
       stage ('dependencies checking stage') {
+        parallel {
             stage ('dependencies audit') {
               steps {
               sh 'npm audit --audit-level=critical'
@@ -27,7 +27,7 @@ pipeline {
                 odcInstallation: 'dependency-check-12.1.7'
               }
             }
-      }
+        }
     }
   }
 }
