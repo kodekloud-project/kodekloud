@@ -9,7 +9,7 @@ pipeline {
         sh 'npm install --no-audit'
       }
     }
-    stage{
+    stage ('dependencies audit') {
       sh 'npm audit --audit-level=critical'
     }
   }
