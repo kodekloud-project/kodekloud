@@ -18,13 +18,14 @@ pipeline {
             }
             stage ('owasp dependency check') {
               steps {
-                dependencyCheck additionalArguments: ''' //small error
-                  --scan "./" \
-                  --out "./" \
-                  --format "ALL" \
-                  --prettyPrint
-                ''',
-                odcInstallation: 'dependency-check-12.1.7'
+                  dependencyCheck additionalArguments: ''' //small error
+                    --scan "./" \
+                    --out "./" \
+                    --format "ALL" \
+                    --prettyPrint
+                  ''',
+                  odcInstallation: 'dependency-check-12.1.7'
+                  dependencyCheckPublisher failedTotalCritical: 1, pattern: 'dependency-check-report.xml', stopBuild: true
               }
             }
         }
