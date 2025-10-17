@@ -34,8 +34,10 @@ pipeline {
         }
       }
       stage ('nodejs testing') {
-        withCredentials([usernamePassword(credentialsId: 'mongo-db-credentials', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
-          sh 'npm test'
+        steps{
+          withCredentials([usernamePassword(credentialsId: 'mongo-db-credentials', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
+            sh 'npm test'
+          }
         }
       }
   }
