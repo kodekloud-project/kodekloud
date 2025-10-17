@@ -3,6 +3,9 @@ pipeline {
   tools{
     nodejs 'nodejs-24-7-0'
   }
+  environment {
+  MONGO_URI = "mongodb+srv://supercluster.d83jj.mongodb.net/superData"
+  }
   stages {
       stage ('install depenedencies') {
         steps{
@@ -29,6 +32,11 @@ pipeline {
               }
             }
         }
-    }
+      }
+      stage ('nodejs testing') {
+        withCredentials([usernamePassword(credentialsId: '', passwordVariable: 'MONGO_PASSWORD', usernameVariable: 'MONGO_USERNAME')]) {
+          sh 'npm test'
+        }
+      }
   }
 }
